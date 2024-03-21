@@ -1,0 +1,347 @@
+getgenv().Settings = {
+    ["Silent"] = {
+        ["Enabled"] = true,
+        ["AimPart"] = "HumanoidRootPart",
+        ["WallCheck"] = true,
+        ["Visualize"] = true,
+        ["Prediction"] = {
+           ["Horizontal"] = 0.15,
+           ["Vertical"] = 0.05,
+        },
+        ["AutoPrediction"] = {
+            ["Enabled"] = true,
+            ["Type"] = "Normal", --//Normal, Custom
+           ["ping20_30"] = 0.12588,
+           ["ping30_40"] = 0.11911,
+           ["ping40_50"] = 0.12471,
+           ["ping50_60"] = 0.13766,
+           ["ping60_70"] = 0.13731,
+           ["ping70_80"] = 0.13951,
+           ["ping80_90"] = 0.14181,
+           ["ping90_100"] = 0.148,
+           ["ping100_110"] = 0.156,
+           ["ping110_120"] = 0.1567,
+           ["ping120_130"] = 0.1601,
+           ["ping130_140"] = 0.1637,
+           ["ping140_150"] = 0.173,
+           ["ping150_160"] = 0.1714,
+           ["ping160_170"] = 0.1863,
+           ["ping170_180"] = 0.1872,
+           ["ping180_190"] = 0.1848,
+           ["ping190_200"] = 0.1865,
+        },
+        ["Mode"] = "Namecall", --index,namecal
+    },
+    ["FOV"] = {
+        ["Enabled"] = true,
+        ["Size"] = 70,
+        ["Filled"] = false,
+        ["Thickness"] = 0,
+        ["Transparency"] = 0,
+        ["Color"] = Color3.fromRGB(255,255,255),
+    },
+    ["Camlock"] = {
+        ["Enabled"] = false,
+        ["AimPart"] = "HumanoidRootPart",
+        ["Prediction"] = {
+           ["Horizontal"] = 0.185,
+           ["Vertical"] = 0.1,
+        },
+        ["Smoothness"] = 0.1,
+        ["AutoPrediction"] = {
+            ["Enabled"] = false,
+            ["Type"] = "Normal", --//Normal, Custom
+           ["ping20_30"] = 0.12588,
+           ["ping30_40"] = 0.11911,
+           ["ping40_50"] = 0.12471,
+           ["ping50_60"] = 0.12766,
+           ["ping60_70"] = 0.12731,
+           ["ping70_80"] = 0.12951,
+           ["ping80_90"] = 0.13181,
+           ["ping90_100"] = 0.138,
+           ["ping100_110"] = 0.146,
+           ["ping110_120"] = 0.1367,
+           ["ping120_130"] = 0.1401,
+           ["ping130_140"] = 0.1437,
+           ["ping140_150"] = 0.153,
+           ["ping150_160"] = 0.1514,
+           ["ping160_170"] = 0.1663,
+           ["ping170_180"] = 0.1672,
+           ["ping180_190"] = 0.1848,
+           ["ping190_200"] = 0.1865,
+        },
+        ["Shake"] = {
+            ["X"] = 10,
+            ["Y"] = 0,
+            ["Z"] = 0, --dont touch
+        },
+    },
+    ["Misc"] = {
+        ["NoDelay"] = true,
+        ["AutoReload"] = true,
+        ["AutoAir"] = {
+            ["Enabled"] = true,
+            ["Interval"] = 0.5,
+        },
+        ["CMDS"] = { 
+            ["Enabled"] = false,
+            ["FOVPrefix"] = "B",
+            ["Prediction"] = "A",
+       },
+    },
+    ["Resolution"] = {
+        ["Value"] = 1,
+       },
+    ["Resolvers"] = {  --entirely not
+        ["Enabled"] = false,
+        ["AutoDetect"] = true,
+        ["Type"] = "Recalculator",
+    },
+    ["Visuals"] = {
+        ["Ambient"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(51, 51, 51),
+        },
+        ["OutDoor Ambient"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(51, 51, 51)
+        },
+        ["Fog Modifications"] = {
+            ["Enabled"] = false,
+            ["Color"] = Color3.fromRGB(4, 0, 255),
+            ["Start"] = 15,
+            ["End"] = 100 
+        },
+        ["ColorCorrection"] = {
+            ["Enabled"] = false,
+            ["Brightness"] = 0,
+            ["Saturation"] = 5,
+            ["Contrast"] = 2,
+        },
+    },
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bobbbb-b/B/main/77_SJQ0ZC.lua"))()game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Divine X⚡";
+                Text = "- Made By 4NX1🔥 -";
+                Duration = 9999;
+            })
+            
+            --// Clone Detection
+for i, v in pairs(game:GetService("CoreGui"):GetChildren()) do
+    if v.Name == "ScreenGui" then
+        v:Destroy()
+    end
+end
+
+repeat
+    wait()
+until game:GetService("Players").LocalPlayer ~= nil
+
+if not game:GetService("Players").LocalPlayer.Character then
+    game:GetService("Players").LocalPlayer.CharacterAdded:Wait()
+end
+
+
+
+--/ Variables & Da Hood Gui Clones Deletion
+
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Character = LocalPlayer.Character
+local Workspace = game:GetService("Workspace")
+local CoreGui = game:GetService("CoreGui")
+
+local LockedPlayer = nil
+local Aimlock = nil
+
+for i, v in pairs(game:GetService("CoreGui"):GetChildren()) do
+    if v.Name == "dhgui" then
+        v:Destroy()
+    end
+end
+
+local mt = getrawmetatable(game)
+local namecall = mt.__namecall
+setreadonly(mt, false)
+
+if getrawmetatable then
+    local mt = getrawmetatable(game)
+    local namecall = mt.__namecall
+    setreadonly(mt, false)
+    
+    mt.__namecall = newcclosure(function(table, ...)
+        local args = {...}
+        local method = getnamecallmethod()
+        if method == "FireServer" and args[1] and args[1] == "UpdateMousePos" then
+            if not (args[3] and args[3] == "Aimlock") then
+                return nil
+            end
+        end
+        return namecall(table, ...)
+    end) 
+end
+
+local function FindPlrOnMouse()
+    for i, v in pairs(game.Workspace:FindPartsInRegion3(Region3.new(LocalPlayer:GetMouse().Hit.Position, LocalPlayer:GetMouse().Hit.Position))) do
+        local plr = game.Players:GetPlayerFromCharacter(v.Parent)
+        if plr ~= nil and plr ~= LocalPlayer then
+            return plr
+        end
+    end
+    return nil
+end
+
+-- // Gui
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
+local TextBox = Instance.new("TextBox")
+
+
+--// Gui Making
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 0, 255)
+Frame.Position = UDim2.new(0.30297032, 0, 0.475625843, 0)
+Frame.Size = UDim2.new(0, 0, 0)
+Frame.Active = true
+Frame.Draggable = true
+
+
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 255)
+TextButton.Position = UDim2.new(0.0554156154, 0, 0.60189575, 0)
+TextButton.Size = UDim2.new(0, 0, 0)
+TextButton.Font = Enum.Font.Cartoon
+TextButton.Text = "Aimlock Tool"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 0
+
+
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_2.Position = UDim2.new(0.570553482, 0, 0.60189575, 0)
+TextButton_2.Size = UDim2.new(0, 0, 0)
+TextButton_2.Font = Enum.Font.Cartoon
+TextButton_2.Text = ""
+TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.TextSize = 0
+
+
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.Position = UDim2.new(0.246851385, 0, 0.218009472, 0)
+TextBox.Size = UDim2.new(0, 0, 0)
+TextBox.Font = Enum.Font.Cartoon
+TextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 0
+
+
+TextButton.MouseButton1Click:connect(function()
+    Aimlock = nil
+    
+    for i, v in pairs(LocalPlayer.Backpack:GetChildren()) do
+        if v.ClassName == "Tool" and v.Name == "Aimlock Tool" then
+            v:Destroy() 
+        end
+    end
+    for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+        if v.ClassName == "Tool" and v.Name == "Aimlock Tool" then
+            v:Destroy() 
+        elseif v.ClassName == "Tool" then
+            v.Parent = LocalPlayer.Backpack
+        end
+    end
+    
+    local AimlockTool = Instance.new("Tool")
+    AimlockTool.Name = "Aimlock Tool"
+    AimlockTool.Parent = LocalPlayer.Backpack
+    AimlockTool.RequiresHandle = false
+    AimlockTool.TextureId = "rbxasset://1532350639"
+    
+    AimlockTool.Activated:Connect(function()
+        local Plr = FindPlrOnMouse()
+        
+        if Plr ~= nil and Plr.Character and Plr.Character:FindFirstChild("Head") and Plr.Character:FindFirstChild("UpperTorso") then
+            Aimlock = Plr 
+            
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "AIMLOCK | Corpse";
+                Text = "Aimlocking towards: " .. Plr.Name .. ", use any gun and shoot anywhere";
+                Button1 = "Ok";
+                Duration = 2.5;
+            })
+        else
+            Aimlock = nil
+            
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "AIMLOCK | Corpse";
+                Text = "No player clicked on, aimlocking towards mouse as normal";
+                Button1 = "Ok";
+                Duration = 2.5;
+            })
+        end
+    end)
+end)
+
+if getrawmetatable then
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChild("Head") then
+            game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character.Head.Position, "Aimlock")
+        elseif Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChildOfClass("Part") then
+            game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character:FindFirstChildOfClass("Part").Position, "Aimlock")
+        elseif Aimlock == nil then
+            game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", game:GetService("Players").LocalPlayer:GetMouse().Hit.Position, "Aimlock")
+        end
+    end)
+else
+    for i = 1, 10 do
+        game:GetService("RunService").Heartbeat:Connect(function()
+            if Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChild("Head") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character.Head.Position)
+            elseif Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChildOfClass("Part") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character:FindFirstChildOfClass("Part").Position)
+            end
+        end)
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChild("Head") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character.Head.Position)
+            elseif Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChildOfClass("Part") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character:FindFirstChildOfClass("Part").Position)
+            end
+        end)
+        game:GetService("RunService").Stepped:Connect(function()
+            if Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChild("Head") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character.Head.Position)
+            elseif Aimlock ~= nil and Aimlock.Character and Aimlock.Character:FindFirstChildOfClass("Part") then
+                game.ReplicatedStorage.MainEvent:FireServer("UpdateMousePos", Aimlock.Character:FindFirstChildOfClass("Part").Position)
+            end
+        end)
+    end
+end
+
+_G.HeadSize = 11
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.7
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Linen")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
